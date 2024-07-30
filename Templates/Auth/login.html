@@ -10,15 +10,17 @@
     <header>
         <nav>
             <div class="logo">e-commerce</div>
-            
         </nav>
-
     </header>
     <main>
         <section>
             <form action="#" method="post">
+                {% csrf_token %}
                 <h2>Login</h2>
-                <label for="username">Username/Email</label>
+                <div class="error">
+                    <p>{{error}}</p>
+                </div>
+                <label for="username">Username</label>
                 <input type="text" name="username" id="username" required>
                 <label for="password">Password</label>
                 <input type="password" name="password" id="password" required>
@@ -26,11 +28,6 @@
                 <p>Don't have an account? <a href="/signup">SignUp</a></p>
             </form>
         </section>
-
     </main>
-    <footer>
-
-    </footer>
-    
 </body>
 </html>
