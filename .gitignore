@@ -1,2 +1,7 @@
 /venv
 /core/__pycache__
+/Auth/__pycache__
+/Auth/migrations/__pycache__
+/store/__pycache__
+/store/migrations/__pycache__
+/db.sqlite3
