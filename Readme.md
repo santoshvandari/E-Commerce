@@ -73,7 +73,7 @@ Follow the mentioned procedure to run this project in your local system.
  ```
 
 ## Contributing
-We welcome contributions! If you'd like to contribute to this File Sharing app, please check out our [Contribution Guidelines](Contribution.md).
+We welcome contributions! If you'd like to contribute to this Ecommerce App , please check out our [Contribution Guidelines](Contribution.md).
 
 ## Code of Conduct
 Please review our [Code of Conduct](CodeOfConduct.md) before participating in this app.
