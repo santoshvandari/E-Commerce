@@ -17,7 +17,7 @@ class Products(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1) 
     description = models.CharField( 
         max_length=250, default='', blank=True, null=True) 
-    image = models.ImageField(upload_to='uploads/products/') 
+    image = models.ImageField(upload_to='media/products/') 
   
     @staticmethod
     def get_products_by_id(ids): 

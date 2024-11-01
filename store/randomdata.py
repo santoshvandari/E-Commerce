@@ -18,7 +18,7 @@ for _ in range(20):  # Generating 20 products
         price=random.randint(10, 1000),  # Random price between 10 and 1000
         category=random.choice(categories),
         description=fake.sentence(nb_words=8),
-        image='uploads/products/sample.jpg'  # Using a placeholder path for the image
+        image='media/products/sample.jpg'  # Using a placeholder path for the image
     )
     product.save()
 
