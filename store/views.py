@@ -6,6 +6,9 @@ from store.validate_customer import validate_customer
 
 # Signup view
 def signup(request):
+    if not request.session.get('customer'):
+        return redirect('homepage')
+
     if request.method == 'GET':
         return render(request, 'signup.html')
     
@@ -48,6 +51,10 @@ def signup(request):
 
 # Login view
 def login_view(request):
+
+    if request.session.get('customer'):
+        return redirect('homepage')
+
     if request.method == 'GET':
         request.session['return_url'] = request.GET.get('return_url')
         return render(request, 'login.html')
@@ -112,6 +119,13 @@ def index(request):
 # Store view
 def store(request):
     cart = request.session.get('cart')
+    product_id = request.GET.get('product_id')
+    if product_id:
+        product = Products.get_products_by_id(product_id).first()
+        print('product:', product)
+        return render(request, 'product_detail.html', {'product': product})
+
+
     if not cart:
         request.session['cart'] = {}
 
