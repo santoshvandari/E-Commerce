@@ -140,8 +140,17 @@ def cart(request):
 
     cart = request.session.get('cart')
     products = Products.get_products_by_id(list(cart.keys()))
-    total = sum(item["price"] * cart[str(item.id)] for item in products)
+    total = sum(item.price * cart[str(item.id)] for item in products)
     return render(request, 'cart.html', {'products': products, 'total': total})
+
+def remove_from_cart(request, product_id):
+    cart = request.session.get('cart', {})
+    cart.pop(str(product_id), None)
+    request.session['cart'] = cart
+    
+
+    return redirect('cart')
+
 
 # Checkout view (requires authentication)
 def checkout(request):
