@@ -7,3 +7,4 @@
 /store/migrations/00*.py
 /store/templatetags/__pycache__
 /db.sqlite3
+/media/products
