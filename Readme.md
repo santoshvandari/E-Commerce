@@ -1,7 +1,6 @@
-# File Sharing WebApp
+# E-Commerce Project
 
-A simple Django-based file-sharing platform where users can upload files and receive a unique link or File ID to access the files. The files and links will automatically expire and be deleted after 24 hours.
-
+Welcome to the E-Commerce Project, a web application built with Django that allows users to shop for products, manage a cart, and view product details. This project aims to provide a seamless online shopping experience.
 
 #### Home Page 
 ![Home Page](home.png)
@@ -11,10 +10,19 @@ A simple Django-based file-sharing platform where users can upload files and rec
 
 ## Features
 
-- File upload with a unique link generated for each file
-- Auto-delete files and links after 24 hours
-- Copy file URL and File ID to clipboard
-- Handle expired files by removing them from the server
+- **User Authentication**: Users can log in and manage their accounts.
+- **Product Catalog**: Browse and filter products by category.
+- **Product Details Page**: View detailed information about each product.
+- **Shopping Cart**: Add products to a cart for purchase.
+- **Responsive Design**: The application is designed to work on various devices.
+
+## Technologies Used
+
+- **Django**: The main web framework used for building the application.
+- **HTML/CSS**: For structuring and styling the web pages.
+- **Bootstrap**: For responsive design and UI components.
+- **SQLite**: The default database used for storing product and user information.
+
 
 ## Usages
 You System must have the following things to use this File Sharing App.
