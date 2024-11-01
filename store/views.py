@@ -140,7 +140,8 @@ def cart(request):
 
     cart = request.session.get('cart')
     products = Products.get_products_by_id(list(cart.keys()))
-    return render(request, 'cart.html', {'products': products})
+    total = sum(item["price"] * cart[str(item.id)] for item in products)
+    return render(request, 'cart.html', {'products': products, 'total': total})
 
 # Checkout view (requires authentication)
 def checkout(request):
