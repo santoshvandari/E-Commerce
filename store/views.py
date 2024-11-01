@@ -38,7 +38,7 @@ def signup(request):
         if not error_message:
             customer.password = make_password(customer.password)
             customer.register()
-            return redirect('homepage')
+            return redirect('login')
         else:
             data = {
                 'error': error_message,
