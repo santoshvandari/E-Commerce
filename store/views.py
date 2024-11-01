@@ -121,7 +121,8 @@ def store(request):
     cart = request.session.get('cart')
     product_id = request.GET.get('product_id')
     if product_id:
-        product = Products.get_product_by_id(product_id)  # Implement this method in your Products model
+        product = Products.get_products_by_id(product_id).first()
+        print('product:', product)
         return render(request, 'product_detail.html', {'product': product})
 
 
