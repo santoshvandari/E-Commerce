@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect 
-from store import models
-from store.models import Products 
-from django.views import View 
+from django.views import View
+from django.contrib.auth.hashers import make_password, check_password
+from store.models import Products, Category, Customer,Order
+from django.db import models
+import datetime
   
   
 # Create your views here. 
