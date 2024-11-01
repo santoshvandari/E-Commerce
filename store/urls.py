@@ -1,15 +1,13 @@
-from django.contrib import admin 
 from django.urls import path 
-from store.views import Index, store, Signup, Login, logout, Cart, CheckOut, OrderView
+from store.views import index, store, signup, login_view, logout_view, cart, checkout, order_view
+
 urlpatterns = [ 
-    path('', Index.as_view(), name='homepage'), 
+    path('', index, name='homepage'), 
     path('store', store, name='store'), 
-  
-    path('signup', Signup.as_view(), name='signup'), 
-    path('login', Login.as_view(), name='login'), 
-    path('logout', logout, name='logout'), 
-    path('cart', auth_middleware(Cart.as_view()), name='cart'), 
-    path('check-out', CheckOut.as_view(), name='checkout'), 
-    path('orders', auth_middleware(OrderView.as_view()), name='orders'), 
-  
-] 
+    path('signup', signup, name='signup'), 
+    path('login', login_view, name='login'), 
+    path('logout', logout_view, name='logout'), 
+    path('cart', cart, name='cart'), 
+    path('check-out', checkout, name='checkout'), 
+    path('orders', order_view, name='orders'), 
+]
