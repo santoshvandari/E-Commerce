@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Your Store</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Your Store</h1>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'homepage' %}">Home</a></li>
+                    <li><a href="{% url 'store' %}">Store</a></li>
+                    <li><a href="{% url 'cart' %}">Cart</a></li>
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Welcome to Your One-Stop Shop!</h2>
+                <p>Discover amazing products tailored just for you.</p>
+                <a href="{% url 'store' %}" class="btn">Shop Now</a>
+            </div>
+        </section>
+
+        <section class="categories">
+            <div class="container">
+                <h3>Shop by Category</h3>
+                <div class="category-grid">
+                    {% for category in categories %}
+                    <div class="category">
+                        <a href="?category={{ category.id }}">
+                            <div class="category-image">
+                                <img src="{% static 'images/category-placeholder.jpg' %}" alt="{{ category.name }}">
+                            </div>
+                            <h4>{{ category.name }}</h4>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <section class="featured-products">
+            <div class="container">
+                <h3>Featured Products</h3>
+                <div class="product-grid">
+                    {% for product in products %}
+                    <div class="product">
+                        <div class="product-image">
+                            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                        </div>
+                        <h4>{{ product.name }}</h4>
+                        <p class="price">${{ product.price }}</p>
+                        <a href="{% url 'store' %}?product_id={{ product.id }}" class="btn">View Details</a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Your Store. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
