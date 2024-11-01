@@ -149,14 +149,7 @@ def remove_from_cart(request, product_id):
 
     return redirect('cart')
 
-# Order view (requires authentication)
-def order_view(request):
-    if not request.session.get('customer'):
-        return redirect('login')
 
-    customer = request.session.get('customer')
-    orders = Order.get_orders_by_customer(customer)
-    return render(request, 'orders.html', {'orders': orders})
 
 # Checkout view (requires authentication)
 def checkout(request):
@@ -198,3 +191,11 @@ def checkout(request):
     total = sum(item.price * cart[str(item.id)] for item in products)
     return render(request, 'checkout.html', {'products': products, 'total': total})
 
+# Order view (requires authentication)
+def order_view(request):
+    if not request.session.get('customer'):
+        return redirect('login')
+
+    customer = request.session.get('customer')
+    orders = Order.get_orders_by_customer(customer)
+    return render(request, 'orders.html', {'orders': orders})
