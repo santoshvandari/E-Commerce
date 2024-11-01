@@ -4,4 +4,6 @@
 /Auth/migrations/__pycache__
 /store/__pycache__
 /store/migrations/__pycache__
+/store/migrations/00*.py
+/store/templatetags/__pycache__
 /db.sqlite3

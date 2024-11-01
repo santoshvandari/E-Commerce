@@ -46,7 +46,6 @@ def signup(request):
             }
             return render(request, 'signup.html', data)
 
-
 # Login view
 def login_view(request):
     if request.method == 'GET':
@@ -80,7 +79,6 @@ def login_view(request):
 def logout_view(request):
     request.session.clear()
     return redirect('login')
-
 
 # Homepage view
 def index(request):
@@ -147,26 +145,34 @@ def remove_from_cart(request, product_id):
     cart = request.session.get('cart', {})
     cart.pop(str(product_id), None)
     request.session['cart'] = cart
-    
+
 
     return redirect('cart')
 
 
+
 # Checkout view (requires authentication)
 def checkout(request):
+    # Check if the user is authenticated
     if not request.session.get('customer'):
         return redirect('login')
 
     if request.method == 'POST':
         address = request.POST.get('address')
         phone = request.POST.get('phone')
-        customer = request.session.get('customer')
+        customer_id = request.session.get('customer')
         cart = request.session.get('cart')
+
+        # Ensure the cart is not empty
+        if not cart:
+            return render(request, 'checkout.html', {'error': 'Your cart is empty. Please add products to your cart before checking out.'})
+
         products = Products.get_products_by_id(list(cart.keys()))
 
+        # Process each product in the cart
         for product in products:
             order = Order(
-                customer=Customer(id=customer),
+                customer=Customer(id=customer_id),
                 product=product,
                 price=product.price,
                 address=address,
@@ -175,8 +181,15 @@ def checkout(request):
             )
             order.save()
 
+        # Clear the cart after successful checkout
         request.session['cart'] = {}
-        return redirect('cart')
+        return redirect('orders')
+
+    # For GET requests, render the checkout page with current cart details
+    cart = request.session.get('cart', {})
+    products = Products.get_products_by_id(list(cart.keys()))
+    total = sum(item.price * cart[str(item.id)] for item in products)
+    return render(request, 'checkout.html', {'products': products, 'total': total})
 
 # Order view (requires authentication)
 def order_view(request):

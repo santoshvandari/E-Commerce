@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold">Your Order History</h1>
+        <p class="lead text-muted">View and track all your past orders below.</p>
+    </div>
+    
+    {% if orders %}
+    <div class="row row-cols-1 row-cols-md-2 g-4 mx-auto justify-content-center">
+        {% for order in orders %}
+        <div class="col">
+            <div class="card h-100 shadow-sm border-0 rounded-4">
+                <div class="card-body p-4">
+                    <h5 class="card-title mb-2">Order ID: <span class="text-primary">{{ order.id }}</span></h5>
+                    <p class="text-muted small"><i class="bi bi-calendar3 me-2"></i>Order Date: {{ order.date }}</p>
+                    <hr>
+                    
+                    <h6 class="text-secondary fw-bold mb-2">{{ order.product.name }}</h6>
+                    <p><strong>Quantity:</strong> {{ order.quantity }}</p>
+                    <p><strong>Price per Item:</strong> ${{ order.price|floatformat:2 }}</p>
+                    <p class="fw-bold"><strong>Total Price:</strong> ${{ order.price|floatformat:2|add:order.quantity }}</p>
+                    <hr>
+                    
+                    <p><i class="bi bi-geo-alt-fill me-2"></i><strong>Shipping Address:</strong> {{ order.address }}</p>
+                    <p><i class="bi bi-telephone-fill me-2"></i><strong>Contact Phone:</strong> {{ order.phone }}</p>
+                    
+                    <span class="badge 
+                    {% if order.status == 'Delivered' %} bg-success text-uppercase
+                    {% elif order.status == 'Pending' %} bg-warning text-uppercase
+                    {% else %} bg-danger text-uppercase
+                    {% endif %}">
+                        {{ order.status }}
+                    </span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-info text-center">
+        <h4 class="fw-light">No orders yet</h4>
+        <p class="text-muted">Looks like you haven’t placed any orders. Explore our products and place your favorites!</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
